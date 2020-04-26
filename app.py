@@ -22,6 +22,13 @@ def predict():
             print("##### line - ", l)
             flair[str(l)]=predictor.predictFlair(str(l))
         return json.dumps(flair)
+
+@app.route('/getFlair', methods=['POST'])
+def getFlair():
+    if request.method=='POST':
+        x = request.form['postURL']    
+        result = predictor.predictFlair(x)
+        return result
  
 if __name__ == '__main__':
     app.run(debug=True, port=33507) 
